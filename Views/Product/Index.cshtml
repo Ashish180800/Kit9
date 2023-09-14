@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Product Search";
+}
+
+<h2>Product Search</h2>
+
+@using (Html.BeginForm("Search", "Product", FormMethod.Post))
+{
+    <div>
+        <label for="ProductName">Product Name:</label>
+        <input type="text" name="ProductName" />
+    </div>
+
+    <div>
+        <label for="Size">Size:</label>
+        <input type="text" name="Size" />
+    </div>
+
+    <div>
+        <label for="Price">Price:</label>
+        <input type="text" name="Price" />
+    </div>
+
+    <div>
+        <label for="MfgDate">Manufacture Date:</label>
+        <input type="text" name="MfgDate" placeholder="yyyy-MM-dd" />
+    </div>
+
+    <div>
+        <label for="Category">Category:</label>
+        <input type="text" name="Category" />
+    </div>
+
+    <div>
+        <label for="Conjunction">Conjunction:</label>
+        <select name="Conjunction">
+            <option value="AND">AND</option>
+            <option value="OR">OR</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="submit" value="Search" />
+        <a href="@Url.Action("Index", "Product")">Clear/Reset</a>
+    </div>
+}
+
+@if (Model != null)
+{
+    <h3>Search Results</h3>
+    <table class="table">
+        <tr>
+            <th>Product Name</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Manufacture Date</th>
+            <th>Category</th>
+        </tr>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.Size</td>
+                <td>@product.Price</td>
+                <td>@product.MfgDate.ToShortDateString()</td>
+                <td>@product.Category</td>
+            </tr>
+        }
+    </table>
+}
